@@ -13,19 +13,23 @@ class _DiasVividosPageState extends State<DiasVividosPage> {
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _idadeController = TextEditingController();
 
-  // Variáveis exigidas pelo professor
   final List entries = [];
   final List colorCodes = [600, 500];
 
+  String _nomeResultado = '';
+  int _diasResultado = 0;
+
   void _calcular() {
     if (_formKey.currentState!.validate()) {
-      final String _nome = _nomeController.text;
-      final int _idade = int.parse(_idadeController.text);
-      final int _diasVividos = _idade * 365;
+      final String nome = _nomeController.text;
+      final int idade = int.parse(_idadeController.text);
+      final int diasVividos = idade * 365;
 
       setState(() {
-        // Inserção na lista exatamente como solicitado
-        entries.add('$_nome tem $_idade anos e viveu ~ $_diasVividos dias.');
+        _nomeResultado = nome;
+        _diasResultado = diasVividos;
+
+        entries.add('$nome tem $idade anos e viveu ~ $diasVividos dias.');
       });
 
       _nomeController.clear();
@@ -56,7 +60,9 @@ class _DiasVividosPageState extends State<DiasVividosPage> {
                   return null;
                 },
               ),
+
               const SizedBox(height: 10),
+
               TextFormField(
                 controller: _idadeController,
                 keyboardType: TextInputType.number,
@@ -68,20 +74,46 @@ class _DiasVividosPageState extends State<DiasVividosPage> {
                   if (value == null || value.isEmpty) {
                     return 'Informe a idade.';
                   }
+
                   if (int.tryParse(value) == null) {
                     return 'Informe um número válido.';
                   }
+
                   return null;
                 },
               ),
+
               const SizedBox(height: 10),
+
               ElevatedButton(
                 onPressed: _calcular,
                 child: const Text('Calcular'),
               ),
+
               const SizedBox(height: 20),
 
-              // Estrutura do ListView.builder mantida integralmente
+              if (_nomeResultado.isNotEmpty)
+                Column(
+                  children: [
+                    Text(
+                      '$_nomeResultado, viveu aproximadamente',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 18),
+                    ),
+
+                    Text(
+                      '$_diasResultado dias',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+                  ],
+                ),
+
               SizedBox(
                 height: 200,
                 width: 300,

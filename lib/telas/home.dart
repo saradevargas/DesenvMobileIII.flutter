@@ -34,23 +34,40 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+
+            // Contador
             ListTile(
               leading: const Icon(Icons.add),
               title: const Text('Contador'),
               onTap: () {
-                Navigator.pop(context); // close the drawer
+                Navigator.pop(context);
                 Navigator.of(context).pushNamed('/contador');
               },
             ),
+
+            // Dias vividos
+            ListTile(
+              leading: const Icon(Icons.calendar_today),
+              title: const Text('Dias vividos'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).pushNamed('/diasvividos');
+              },
+            ),
+
+            // Sobre o app
             ListTile(
               leading: const Icon(Icons.help),
               title: const Text('Sobre o app'),
               onTap: () {
-                Navigator.pop(context); // close the drawer
+                Navigator.pop(context);
                 Navigator.of(context).pushNamed('/sobre');
               },
             ),
+
             const Divider(),
+
+            // Sair
             ListTile(
               leading: const Icon(Icons.exit_to_app, color: Colors.red),
               title: const Text('Sair'),
@@ -62,6 +79,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -72,6 +90,7 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 24),
+
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image(
@@ -81,7 +100,9 @@ class _HomePageState extends State<HomePage> {
                 fit: BoxFit.cover,
               ),
             ),
+
             const SizedBox(height: 24),
+
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushNamed('/contador');
@@ -92,7 +113,9 @@ class _HomePageState extends State<HomePage> {
               ),
               child: const Text('Ir para Contador'),
             ),
+
             const SizedBox(height: 12),
+
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(
